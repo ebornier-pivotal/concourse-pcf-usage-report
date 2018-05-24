@@ -10,7 +10,7 @@ image_resource:
 inputs:
   - name: orgs-usage-consolidated
 outputs:
-  - name: orgs-usage-consolidated
+  - name: orgs-usage-filtered
 
 run:
   path: sh
