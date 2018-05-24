@@ -8,9 +8,7 @@ image_resource:
     tag: "latest"
 
 inputs:
-  - name: pipeline-scripts
-  - name: report-time-range
-  - name: orgs-usage
+  - name: orgs-usage-consolidated
 outputs:
   - name: orgs-usage-consolidated
 
@@ -20,4 +18,5 @@ run:
   - -exc
   - |
     node ./pipeline-scripts/scripts/consolidate-usage-data.js
-    mv `ls ./orgs-usage-consolidated/*.json` ./orgs-usage-consolidated/report.json
+    ls -la ./orgs-usage-consolidated
+    cat `ls ./orgs-usage-consolidated/*.json`
