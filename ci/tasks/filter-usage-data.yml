@@ -18,4 +18,4 @@ run:
   args:
   - -exc
   - |
-    ls
+    find .
