@@ -37,10 +37,6 @@ jobs:
       trigger: false
     # - get: monthly-trigger
     #   trigger: true
-    - task: prep-notification-email-text
-      file: pipeline-scripts/ci/tasks/prepare-email.yml
-      params:
-        PCF_DEPLOY_NAME: {{pcf-deploy-name}}
 
     - task: define-report-time-range
       config:
@@ -86,6 +82,12 @@ jobs:
       params:
         PCF_DEPLOY_NAME: {{pcf-deploy-name}}
 
+
+    - task: filter-usage-data
+      file: pipeline-scripts/ci/tasks/filter-usage-data.yml
+      params:
+        PCF_DEPLOY_NAME: {{pcf-deploy-name}}
+        
     - put: send-email
       params:
         to: [ {{email-to}} ]
