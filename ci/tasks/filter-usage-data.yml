@@ -9,8 +9,9 @@ image_resource:
 
 inputs:
   - name: orgs-usage-consolidated
+  - name: pipeline-scripts
 outputs:
   - name: orgs-usage-filtered
 
 run:
-  path: ci/tasks/filter-usage-data.sh 
+  path: pipeline-scripts/ci/tasks/filter-usage-data.sh 
