@@ -4,7 +4,7 @@ platform: linux
 image_resource:
   type: docker-image
   source:
-    repository: pivotalservices/pcf-usage-tools
+    repository: everpeace/curl-jq
     tag: "latest"
 
 inputs:
@@ -13,8 +13,4 @@ outputs:
   - name: orgs-usage-filtered
 
 run:
-  path: sh
-  args:
-  - -exc
-  - |
-    cat ./orgs-usage-consolidated/report.json
+  path: ci/tasks/filter-usage-data.sh 
