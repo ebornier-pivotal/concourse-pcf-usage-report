@@ -14,4 +14,8 @@ outputs:
   - name: orgs-usage-filtered
 
 run:
-  path: pipeline-scripts/ci/tasks/filter-usage-data.sh
+  path: sh
+  args:
+  - -exc
+  - |
+    ls
