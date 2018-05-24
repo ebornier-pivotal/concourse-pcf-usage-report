@@ -16,6 +16,14 @@ resources:
     branch: master
     uri: {{git-project-url}}
     skip_ssl_verification: true
+- name: file-repository
+  type: s3
+  source:
+    bucket: {{s3-bucket}}
+    access_key_id: {{s3-access-key-id}}
+    secret_access_key: {{s3-secret-access-key}}
+    regexp: pcf-.*-usage-from-\d{4}-\d{2}-\d{2}-to-\d{4}-\d{2}-\d{2}_(.*).json
+    region_name: {{s3-region_name}}
 - name: send-email
   type: email
   source:
@@ -86,6 +94,10 @@ jobs:
       params:
         PCF_DEPLOY_NAME: {{pcf-deploy-name}}
 
+    - put: file-repository
+      params:
+        file: ./orgs-usage-consolidated/*.json
+        acl: public-read
 
     on_failure:
       put: send-email
@@ -102,7 +114,11 @@ jobs:
   - do:
     - get: pipeline-scripts
       trigger: false
-  
+    - get: file-repository
+      trigger: true
+      passed:
+      - retrieve-and-process-pcf-usage-data
+
     - task: prep-notification-email-text
       file: pipeline-scripts/ci/tasks/prepare-email.yml
       params:

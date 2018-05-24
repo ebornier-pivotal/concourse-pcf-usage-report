@@ -21,3 +21,4 @@ run:
   - |
     node ./pipeline-scripts/scripts/consolidate-usage-data.js
     ls -la ./orgs-usage-consolidated
+    cat `ls *.json`
