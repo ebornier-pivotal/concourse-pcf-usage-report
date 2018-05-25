@@ -16,4 +16,4 @@
 
 #.organizations[] | [.name + " " +  .spaces[].name + " " +  (.spaces[].guid|tostring)]
 
-cat $1 | jq -r '.organizations[] | [ .name  + " ; " +   (.spaces[] | [ .name , .total_app_instance_count|tostring]| join(" ; ") ) ]' 
+cat $1 | jq -r '.organizations[] | [ .name  + " ; " +   (.spaces[] | [ .name , .total_app_instance_count|tostring]| join(" ; ") ) ]' | grep ";" | tr -d ' ' | tr -d '"' | tr -d ','
