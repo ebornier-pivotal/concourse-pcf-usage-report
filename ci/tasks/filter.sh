@@ -25,7 +25,11 @@
 #        PCF_ORG: {{pcf-org}}
 #        PCF_SPACE: {{pcf-space}}
 
-cf login -u $SYS_ADMIN_USER -p $SYS_ADMIN_PASSWORD -a $PCF_API_ENDPOINT --skip-ssl-validation
+set -x
+
+cf login -u $SYS_ADMIN_USER -p $SYS_ADMIN_PASSWORD -a $PCF_API_ENDPOINT -o system -s system --skip-ssl-validation
+
+exit 0
 
 echo "org;org_ai;space;space_ai"
 
