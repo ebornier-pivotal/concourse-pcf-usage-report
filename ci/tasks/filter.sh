@@ -27,10 +27,6 @@
 
 set -x
 
-cf login -u $SYS_ADMIN_USER -p $SYS_ADMIN_PASSWORD -a $PCF_API_ENDPOINT -o system -s system --skip-ssl-validation
-
-exit 0
-
 echo "org;org_ai;space;space_ai"
 
 cat $2 | jq -r '
