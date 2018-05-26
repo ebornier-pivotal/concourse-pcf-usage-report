@@ -1,4 +1,4 @@
 #!/bin/bash
 
 
-./pipeline-scripts/ci/tasks/filter.sh ./orgs-usage-consolidated/report.json
+./pipeline-scripts/ci/tasks/filter.sh -trial ./orgs-usage-consolidated/report.json
