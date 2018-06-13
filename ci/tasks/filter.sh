@@ -25,12 +25,12 @@
 #        PCF_ORG: {{pcf-org}}
 #        PCF_SPACE: {{pcf-space}}
 
-set -x
+# set -x
 
 echo "org;org_ai;space;space_ai"
 
-cat $2 | jq -r '
-.organizations[] | [ .name  + " ; " + (.total_app_instance_count|tostring) + " ; " +  (.spaces[] | [ .name , .total_app_instance_count|tostring]| join(" ; ") ) ]' | grep ";" | tr -d ' ' | tr -d '"' | tr -d ','
+# cat $2 | jq -r '
+# .organizations[] | [ .name  + " ; " + (.total_app_instance_count|tostring) + " ; " +  (.spaces[] | [ .name , .total_app_instance_count|tostring]| join(" ; ") ) ]' | grep ";" | tr -d ' ' | tr -d '"' | tr -d ','
 
 echo "init"
 
