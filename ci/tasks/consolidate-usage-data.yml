@@ -15,9 +15,9 @@ outputs:
   - name: orgs-usage-consolidated
 
 run:
-  path: sh
-  args:
-  - -exc
-  - |
-    node ./pipeline-scripts/scripts/consolidate-usage-data.js
-    mv `ls ./orgs-usage-consolidated/*.json` ./orgs-usage-consolidated/report.json
+  path: ls
+  # args:
+  # - -exc
+  # - |
+  #   node ./pipeline-scripts/scripts/consolidate-usage-data.js
+  #   mv `ls ./orgs-usage-consolidated/*.json` ./orgs-usage-consolidated/report.json

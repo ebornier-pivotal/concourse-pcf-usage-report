@@ -14,8 +14,8 @@ outputs:
   - name: orgs-usage
 
 run:
-  path: sh
-  args:
-  - -exc
-  - |
-    node pipeline-scripts/scripts/get-usage-data.js
+  path: ls
+  # args:
+  # - -exc
+  # - |
+  #   node pipeline-scripts/scripts/get-usage-data.js
