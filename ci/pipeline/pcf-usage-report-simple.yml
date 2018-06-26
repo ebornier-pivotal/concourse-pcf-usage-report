@@ -20,6 +20,7 @@ resources:
     branch: master
     uri: {{git-project-url}}
     skip_ssl_verification: true
+    private_key: {{git-private-key}}
 - name: send-email
   type: email
   source:
