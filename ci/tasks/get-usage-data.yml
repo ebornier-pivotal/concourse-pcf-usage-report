@@ -19,7 +19,4 @@ run:
   - -exc
   - |
     ls -l *
-  # args:
-  # - -exc
-  # - |
-  #   node pipeline-scripts/scripts/get-usage-data.js
+    node pipeline-scripts/scripts/get-usage-data.js
