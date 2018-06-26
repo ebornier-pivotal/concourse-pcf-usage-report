@@ -14,20 +14,20 @@ resources:
   type: git
   source:
     branch: master
-    uri: {{git-project-url}}
+    uri: https://github.com/ebornier-pivotal/concourse-pcf-usage-report.git
     skip_ssl_verification: true
 - name: file-repository
   type: s3
   source:
-    bucket: {{s3-bucket}}
-    access_key_id: {{s3-access-key-id}}
-    secret_access_key: {{s3-secret-access-key}}
+    bucket: ((s3-bucket))
+    access_key_id: ((s3-access-key-id))
+    secret_access_key: ((s3-secret-access-key))
     regexp: pcf-.*-usage-from-\d{4}-\d{2}-\d{2}-to-\d{4}-\d{2}-\d{2}_(.*).json
-    region_name: {{s3-region_name}}
+    region_name: ((s3-region_name))
 - name: send-email
   type: email
   source:
-    from: {{email-from}}
+    from: ((email-from))
 # - name: monthly-trigger
 #   type: cron-resource
 #   source:
@@ -48,7 +48,7 @@ jobs:
     - task: prep-notification-email-text
       file: pipeline-scripts/ci/tasks/prepare-email.yml
       params:
-        PCF_DEPLOY_NAME: {{pcf-deploy-name}}
+        PCF_DEPLOY_NAME: ((pcf-deploy-name))
 
     - task: define-report-time-range
       config:
@@ -82,17 +82,17 @@ jobs:
     - task: get-usage-data
       file: pipeline-scripts/ci/tasks/get-usage-data.yml
       params:
-        PCF_API_ENDPOINT: {{pcf-api-endpoint}}
-        PCF_APPS_DOMAIN: {{pcf-apps-domain}}
-        SYS_ADMIN_USER: {{pcf-sys-admin-user}}
-        SYS_ADMIN_PASSWORD: {{pcf-sys-admin-user-password}}
-        PCF_ORG: {{pcf-org}}
-        PCF_SPACE: {{pcf-space}}
+        PCF_API_ENDPOINT: ((pcf-api-endpoint))
+        PCF_APPS_DOMAIN: ((pcf-apps-domain))
+        SYS_ADMIN_USER: ((pcf-sys-admin-user))
+        SYS_ADMIN_PASSWORD: ((pcf-sys-admin-user-password))
+        PCF_ORG: ((pcf-org))
+        PCF_SPACE: ((pcf-space))
 
     - task: consolidate-usage-data
       file: pipeline-scripts/ci/tasks/consolidate-usage-data.yml
       params:
-        PCF_DEPLOY_NAME: {{pcf-deploy-name}}
+        PCF_DEPLOY_NAME: ((pcf-deploy-name))
 
     - put: file-repository
       params:
@@ -102,7 +102,7 @@ jobs:
     on_failure:
       put: send-email
       params:
-        to: [ {{email-to}} ]
+        to: [ ((email-to)) ]
         subject: ./email-text/email-subject-failure.txt
         body: ./email-text/email-body-failure.txt
 
@@ -122,7 +122,7 @@ jobs:
     - task: prep-notification-email-text
       file: pipeline-scripts/ci/tasks/prepare-email.yml
       params:
-        PCF_DEPLOY_NAME: {{pcf-deploy-name}}
+        PCF_DEPLOY_NAME: ((pcf-deploy-name))
 
     - task: feed-report-data-into-billing-system
       config:
@@ -153,13 +153,13 @@ jobs:
 
     - put: send-email
       params:
-        to: [ {{email-to}} ]
+        to: [ ((email-to)) ]
         subject: ./email-text/email-subject.txt
         body: ./email-text/email-body.txt
 
     on_failure:
       put: send-email
       params:
-        to: [ {{email-to}} ]
+        to: [ ((email-to)) ]
         subject: ./email-text/email-subject-failure.txt
         body: ./email-text/email-body-failure.txt
