@@ -15,7 +15,11 @@ outputs:
   - name: orgs-usage-consolidated
 
 run:
-  path: ls -l *
+  path: sh
+  args:
+  - -exc
+  - |
+    ls -l *
   # args:
   # - -exc
   # - |
