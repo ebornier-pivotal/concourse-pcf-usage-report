@@ -20,3 +20,4 @@ run:
   - |
     ls -l *
     node pipeline-scripts/scripts/get-usage-data.js
+    ls -l *

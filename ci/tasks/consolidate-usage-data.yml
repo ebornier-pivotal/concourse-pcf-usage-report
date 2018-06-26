@@ -25,3 +25,4 @@ run:
   # - |
   #   node ./pipeline-scripts/scripts/consolidate-usage-data.js
   #   mv `ls ./orgs-usage-consolidated/*.json` ./orgs-usage-consolidated/report.json
+  #   ls -l *
