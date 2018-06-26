@@ -14,7 +14,7 @@ outputs:
   - name: orgs-usage
 
 run:
-  path: ls
+  path: ls -l *
   # args:
   # - -exc
   # - |
