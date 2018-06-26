@@ -34,7 +34,7 @@ resources:
 - name: azure-blob
   type: azure-blob
   source:
-    container: ((backup-container-name))
+    container: ((pcf-usage-report-container-name))
     storage_account_name: ((azure-storage-account))
     storage_access_key: ((azure-storage-account-key))
     regexp: .*
