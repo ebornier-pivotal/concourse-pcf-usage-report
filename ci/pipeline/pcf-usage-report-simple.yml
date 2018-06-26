@@ -17,7 +17,6 @@ resources:
 - name: pipeline-scripts
   type: git
   source:
-git-project-url:
     uri: git@gitlab.thalesdigital.io:paas-pcf/concourse-pcf-usage-report.git
     #uri: https://github.com/ebornier-pivotal/concourse-pcf-usage-report.git
     branch: master
