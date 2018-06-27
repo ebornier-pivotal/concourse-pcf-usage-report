@@ -71,7 +71,7 @@ GetPCFUsageData.prototype.cfGetServices = function() {
   var cf_cmd = 'cf curl /v2/services';
   console.log("Retrieving services list");
   var currentGetPCFUsageDataObject = this;
-  exec(cf_cmd, {maxBuffer: 1024 * 1024}, function(error, stdout, stderr) {
+  exec(cf_cmd, {maxBuffer: 100 * 1024 * 1024}, function(error, stdout, stderr) {
     if (! currentGetPCFUsageDataObject.execError("cfGetServices",error,stderr)) {
       var parsedObject=JSON.parse(stdout, 'utf8');
       currentGetPCFUsageDataObject.orgsUsageObject.services=parsedObject;
