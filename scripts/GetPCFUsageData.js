@@ -71,7 +71,7 @@ GetPCFUsageData.prototype.cfGetServices = function() {
   var cf_cmd = 'cf curl /v2/services';
   console.log("Retrieving services list");
   var currentGetPCFUsageDataObject = this;
-  exec(cf_cmd, {maxBuffer: 100 * 1024 * 1024}, function(error, stdout, stderr) {
+  exec(cf_cmd, {maxBuffer: 10 * 1024 * 1024}, function(error, stdout, stderr) {
     if (! currentGetPCFUsageDataObject.execError("cfGetServices",error,stderr)) {
       var parsedObject=JSON.parse(stdout, 'utf8');
       currentGetPCFUsageDataObject.orgsUsageObject.services=parsedObject;
@@ -185,9 +185,9 @@ GetPCFUsageData.prototype.mergeSpaceUsageInfo = function(servicesUsageObject,spa
 GetPCFUsageData.prototype.cfGetOrgApplicationsUsage = function(orgIndex,orgGuid) {
   console.log("Getting Applications usage for the org")
   var cf_cmd = 'curl "https://app-usage.'+process.env.PCF_APPS_DOMAIN+'/organizations/'+orgGuid+'/app_usages?start='+this.reportTimeRangeObject.USAGE_START_DATE+'&end='+this.reportTimeRangeObject.USAGE_END_DATE+'" -k -H "authorization: `cf oauth-token`"';
-  // console.log("Command: "+cf_cmd);
+  console.log("Command: "+cf_cmd);
   var currentGetPCFUsageDataObject = this;
-  exec(cf_cmd, function(error, stdout, stderr) {
+  exec(cf_cmd, {maxBuffer: 10 * 1024 * 1024}, function(error, stdout, stderr) {
     if (! currentGetPCFUsageDataObject.execError("cfGetOrgApplicationsUsage",error,stderr)) {
       var parsedObject=JSON.parse(stdout, 'utf8');
       if (parsedObject.error) {
