@@ -116,5 +116,5 @@ jobs:
         file: orgs-usage/*
     - put: azure-blob
       params:
-        file: orgs-usage-filtered/*
+        file: orgs-usage-consolidated/*
 
