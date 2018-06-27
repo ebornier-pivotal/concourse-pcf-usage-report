@@ -20,9 +20,6 @@ run:
   - -exc
   - |
     ls -l *
-  # args:
-  # - -exc
-  # - |
-  #   node ./pipeline-scripts/scripts/consolidate-usage-data.js
-  #   mv `ls ./orgs-usage-consolidated/*.json` ./orgs-usage-consolidated/report.json
-  #   ls -l *
+    node ./pipeline-scripts/scripts/consolidate-usage-data.js
+    mv `ls ./orgs-usage-consolidated/*.json` ./orgs-usage-consolidated/report.json
+    ls -l *
