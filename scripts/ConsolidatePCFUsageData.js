@@ -44,7 +44,7 @@ ConsolidatePCFUsageData.prototype.processAllOrganizations = function() {
 
 ConsolidatePCFUsageData.prototype.saveConsolidatedObject = function() {
   fs.writeFile(this.outputFileName, JSON.stringify(this.outputConsolidatedObject, null, 2) , 'utf-8');
-  console.log("Resulting usage report object: "+JSON.stringify(this.outputConsolidatedObject, null, 2));
+  // console.log("Resulting usage report object: "+JSON.stringify(this.outputConsolidatedObject, null, 2));
 };
 
 ConsolidatePCFUsageData.prototype.processOrganization = function(item) {
