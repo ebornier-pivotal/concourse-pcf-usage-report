@@ -56,7 +56,7 @@ GetPCFUsageData.prototype.cfGetQuotas = function() {
   var cf_cmd = 'cf curl /v2/quota_definitions';
   console.log("Retrieving organization quota definitions");
   var currentGetPCFUsageDataObject = this;
-  exec(cf_cmd, function(error, stdout, stderr) {
+  exec(cf_cmd, {maxBuffer: 1024 * 1024}, function(error, stdout, stderr) {
     if (! currentGetPCFUsageDataObject.execError("cfGetQuotas",error,stderr)) {
       var quotasObject=JSON.parse(stdout, 'utf8');
       currentGetPCFUsageDataObject.orgsUsageObject.quota_definitions=quotasObject;
@@ -119,7 +119,7 @@ GetPCFUsageData.prototype.cfGetOrgUsage = function(orgIndex) {
   console.log("Processing organization "+current_org_object.entity.name);
   console.log("Getting all Space Quotas for the org")
   var cf_cmd = 'cf curl /v2/organizations/'+current_org_guid+'/space_quota_definitions';
-  exec(cf_cmd, function(error, stdout, stderr) {
+  exec(cf_cmd, {maxBuffer: 1024 * 1024}, function(error, stdout, stderr) {
     if (! currentGetPCFUsageDataObject.execError("cfGetOrgsUsage",error,stderr)) {
       var parsedObject=JSON.parse(stdout, 'utf8');
       currentGetPCFUsageDataObject.orgsUsageObject.resources[orgIndex].space_quota_definitions=parsedObject;
@@ -148,8 +148,9 @@ GetPCFUsageData.prototype.cfGetOrgSpaces = function(orgIndex,orgGuid) {
 GetPCFUsageData.prototype.cfGetOrgServicesUsage = function(orgIndex,orgGuid) {
   console.log("Getting Services usage for the org")
   var cf_cmd = 'curl "https://app-usage.'+process.env.PCF_APPS_DOMAIN+'/organizations/'+orgGuid+'/service_usages?start='+this.reportTimeRangeObject.USAGE_START_DATE+'&end='+this.reportTimeRangeObject.USAGE_END_DATE+'" -k -H "authorization: `cf oauth-token`"';
+  console.log("Command: " + cf_cmd);
   var currentGetPCFUsageDataObject = this;
-  exec(cf_cmd, function(error, stdout, stderr) {
+  exec(cf_cmd, {maxBuffer: 10 * 1024 * 1024}, function(error, stdout, stderr) {
     if (! currentGetPCFUsageDataObject.execError("cfGetOrgServicesUsage",error,stderr)) {
       var parsedObject=JSON.parse(stdout, 'utf8');
       if (parsedObject.error) {
@@ -226,7 +227,7 @@ GetPCFUsageData.prototype.cfGetApplicationsOfSpace = function(orgIndex,orgGuid,s
     var spaceObject=currentGetPCFUsageDataObject.orgsUsageObject.resources[orgIndex].spaces.resources[spaceIndex];
     console.log("Getting apps for space "+spaceObject.metadata.guid);
     var cf_cmd = 'cf curl /v2/spaces/'+spaceObject.metadata.guid+'/apps';
-    exec(cf_cmd, function(error, stdout, stderr) {
+    exec(cf_cmd, {maxBuffer: 1024 * 1024}, function(error, stdout, stderr) {
       if (! currentGetPCFUsageDataObject.execError("cfGetApplicationsOfSpace",error,stderr)) {
         var parsedObject=JSON.parse(stdout, 'utf8');
         spaceObject.applications=parsedObject;
