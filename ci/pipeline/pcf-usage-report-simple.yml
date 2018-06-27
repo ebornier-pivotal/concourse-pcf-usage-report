@@ -89,21 +89,21 @@ jobs:
         PCF_ORG: ((pcf-org))
         PCF_SPACE: ((pcf-space))
 
-    # - task: consolidate-usage-data
-    #   file: pipeline-scripts/ci/tasks/consolidate-usage-data.yml
-    #   params:
-    #     PCF_DEPLOY_NAME: ((pcf-deploy-name))
+    - task: consolidate-usage-data
+      file: pipeline-scripts/ci/tasks/consolidate-usage-data.yml
+      params:
+        PCF_DEPLOY_NAME: ((pcf-deploy-name))
 
-    # - task: filter-usage-data
-    #   file: pipeline-scripts/ci/tasks/filter-usage-data.yml
-    #   params:
-    #     PCF_DEPLOY_NAME: ((pcf-deploy-name))
-    #     PCF_API_ENDPOINT: ((pcf-api-endpoint))
-    #     PCF_APPS_DOMAIN: ((pcf-apps-domain))
-    #     SYS_ADMIN_USER: ((pcf-sys-admin-user))
-    #     SYS_ADMIN_PASSWORD: ((pcf-sys-admin-user-password))
-    #     PCF_ORG: ((pcf-org))
-    #     PCF_SPACE: ((pcf-space))
+    - task: filter-usage-data
+      file: pipeline-scripts/ci/tasks/filter-usage-data.yml
+      params:
+        PCF_DEPLOY_NAME: ((pcf-deploy-name))
+        PCF_API_ENDPOINT: ((pcf-api-endpoint))
+        PCF_APPS_DOMAIN: ((pcf-apps-domain))
+        SYS_ADMIN_USER: ((pcf-sys-admin-user))
+        SYS_ADMIN_PASSWORD: ((pcf-sys-admin-user-password))
+        PCF_ORG: ((pcf-org))
+        PCF_SPACE: ((pcf-space))
         
     # - put: send-email
     #   params:
