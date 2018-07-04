@@ -25,12 +25,12 @@ resources:
 #   type: email
 #   source:
 #     from: ((email-from))
-# - name: monthly-trigger
-#   type: cron-resource
-#   source:
-#     location: "America/New_York"
-#     expression: "0 6 1 * *"
+- name: monthly-trigger
+  type: cron-resource
+  source:
     # trigger on the first day of each month at 6:00am ET
+    location: "Europe/Paris"
+    expression: "0 6 1 * *"
 - name: azure-blob
   type: azure-blob
   source:
@@ -47,8 +47,8 @@ jobs:
   - do:
     - get: pipeline-scripts
       trigger: false
-    # - get: monthly-trigger
-    #   trigger: true
+    - get: monthly-trigger
+      trigger: true
 
     - task: define-report-time-range
       config:
