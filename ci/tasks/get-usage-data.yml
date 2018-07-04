@@ -19,5 +19,9 @@ run:
   - -exc
   - |
     ls -l *
+    rm -f ./orgs-usage/pcf-orgs-usage.json
     node pipeline-scripts/scripts/get-usage-data.js
+    ls -l *
+    export datetimePrefix=$(date +%Y%m%d_%H%M_)
+    cp -f ./orgs-usage/pcf-orgs-usage.json ./orgs-usage/${datetimePrefix}pcf-orgs-usage.json
     ls -l *

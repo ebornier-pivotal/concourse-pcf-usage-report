@@ -20,6 +20,9 @@ run:
   - -exc
   - |
     ls -l *
+    rm -rf ./orgs-usage-consolidated/2*.json
     node ./pipeline-scripts/scripts/consolidate-usage-data.js
-    mv `ls ./orgs-usage-consolidated/*.json` ./orgs-usage-consolidated/report.json
+    export datetimePrefix=$(date +%Y%m%d_%H%M_)
+    cp -f $(ls -p -t ./orgs-usage-consolidated/*.json | grep -v '/' | head -1) ./orgs-usage-consolidated/${datetimePrefix}report.json
+    cp -f ./orgs-usage-consolidated/${datetimePrefix}report.json ./orgs-usage-consolidated/report.json
     ls -l *
